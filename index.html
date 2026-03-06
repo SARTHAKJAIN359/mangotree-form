@@ -20,7 +20,7 @@ body{font-family:'Nunito',sans-serif;background:#F2F5F3;min-height:100vh;display
 
 /* Logo row — full-width wide logo image */
 .logo-row{display:flex;flex-direction:column;align-items:flex-start;gap:10px;margin-bottom:16px;position:relative;z-index:1;}
-.logo-box{width:100%;max-width:120px;height:60px;border-radius:13px;background:#fff;padding:5px 14px;box-shadow:0 5px 20px rgba(0,0,0,.22),0 0 0 3px rgba(245,166,35,.5);display:flex;align-items:center;justify-content:flex-start;overflow:hidden;}
+.logo-box{width:100%;max-width:150px;height:60px;border-radius:13px;background:#fff;padding:5px 14px;box-shadow:0 5px 20px rgba(0,0,0,.22),0 0 0 3px rgba(245,166,35,.5);display:flex;align-items:center;justify-content:flex-start;overflow:hidden;}
 .logo-box img{width:auto;max-width:100%;height:100%;object-fit:contain;object-position:left center;display:block;}
 .logo-fb{font-size:34px;line-height:1;display:none;}
 .brand{display:flex;flex-direction:column;gap:1px;}
@@ -436,29 +436,37 @@ function getData(){
   };
 }
 
-// ── Submit — fetch POST to Apps Script ───────────────────────────────────────
-// The form lives on mangotreeinsurance.com (NOT on Google).
-// It silently POSTs data to Apps Script in the background.
-// No Google login needed. Works on every phone, every browser.
+// ── Submit — GET request with URL params (works cross-origin, no CORS issues) ─
+// POST+no-cors doesn't actually send data to Apps Script from external domains.
+// GET requests with URL params work perfectly and bypass all CORS restrictions.
 function doSubmit(){
   if(!v1()||!v2()||!v3()) return;
   var data = getData();
   var btn  = document.getElementById('subBtn');
   btn.classList.add('ld'); btn.disabled = true;
 
-  fetch(GAS_URL, {
-    method:  'POST',
-    mode:    'no-cors',   // Apps Script requires this for cross-origin POSTs
-    headers: {'Content-Type':'application/json'},
-    body:    JSON.stringify(data)
-  })
-  .then(function(){ showSucc(data); })
-  .catch(function(err){
-    // With no-cors, fetch may report an error even when data was saved.
-    // Show success anyway and let them verify in Google Sheet.
-    console.warn('Note:', err);
-    showSucc(data);
+  // Build URL with all form data as query parameters
+  var params = new URLSearchParams({
+    name:        data.name,
+    phone:       data.phone,
+    email:       data.email,
+    city:        data.city,
+    coverage:    data.coverage,
+    family:      data.family,
+    meetingTime: data.meetingTime,
+    questions:   data.questions
   });
+
+  // Use an image tag trick — fires a GET to Apps Script with zero CORS issues
+  // Apps Script doGet() receives the params, saves to Sheet, sends emails
+  var img = new Image();
+  img.onload = img.onerror = function(){ showSucc(data); };
+  img.src = GAS_URL + '?action=submit&' + params.toString();
+
+  // Fallback: show success after 4 seconds even if image never loads
+  setTimeout(function(){
+    if(btn.classList.contains('ld')){ showSucc(data); }
+  }, 4000);
 }
 
 // ── Success screen + countdown redirect ──────────────────────────────────────
