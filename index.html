@@ -455,17 +455,17 @@ function getData(){
 // the user submits — no need to check email or Sheets.
 function openWhatsApp(data) {
   var lines = [
-    "🥭 *New MangoTree Consultation Booking*",
+    " *New MangoTree Consultation Booking*",
     "",
-    "👤 *Name:* "         + data.name,
-    "📱 *Phone:* "        + data.phone,
-    "⏰ *Meeting Time:* " + data.meetingTime,
-    "👨‍👩‍👧 *Family Members:* " + data.family,
-    "💰 *Coverage:* "     + data.coverage,
-    data.city ? "🌆 *City:* " + data.city : null,
-    data.questions ? "💬 *Questions:* " + data.questions : null,
+    " *Name:* "         + data.name,
+    " *Phone:* "        + data.phone,
+    " *Meeting Time:* " + data.meetingTime,
+    " *Family Members:* " + data.family,
+    " *Coverage:* "     + data.coverage,
+    data.city ? " *City:* " + data.city : null,
+    data.questions ? " *Questions:* " + data.questions : null,
     "",
-    "📍 *Office:* 324, Cloud 9, Vaishali – 201010",
+    " *Office:* 324, Cloud 9, Vaishali – 201010",
     "https://maps.app.goo.gl/g95Y4mkAmH3YFw348",
     "",
     "Please confirm my appointment. Thank you! 🙏"
@@ -518,12 +518,12 @@ function showSucc(data){
   ss.classList.add('on');
 
   document.getElementById('bkCard').innerHTML =
-    '<div class="bkrow">🧑 <strong>'+data.name+'</strong></div>'+
-    '<div class="bkrow">📞 <strong>'+data.phone+'</strong></div>'+
-    '<div class="bkrow">⏰ <strong>'+data.meetingTime+'</strong></div>'+
-    (data.city?'<div class="bkrow">🏙️ <strong>'+data.city+'</strong></div>':'')+
-    '<div class="bkrow">👨‍👩‍👦‍👦 <strong>'+data.family+'</strong></div>'+
-    '<div class="bkrow">📍 <strong>324, Cloud 9, Vaishali – 201010</strong></div>';
+    '<div class="bkrow"> <strong>'+data.name+'</strong></div>'+
+    '<div class="bkrow"> <strong>'+data.phone+'</strong></div>'+
+    '<div class="bkrow"> <strong>'+data.meetingTime+'</strong></div>'+
+    (data.city?'<div class="bkrow"> <strong>'+data.city+'</strong></div>':'')+
+    '<div class="bkrow"> <strong>'+data.family+'</strong></div>'+
+    '<div class="bkrow"> <strong>324, Cloud 9, Vaishali – 201010</strong></div>';
 
   // ── Change 3: Open WhatsApp immediately on success ──────────────────────────
   openWhatsApp(data);
