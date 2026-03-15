@@ -5,815 +5,546 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>MangoTree Insurance — Free Consultation</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
 <style>
+/* ── Reset & base ─────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html{-webkit-text-size-adjust:100%;}
+body{font-family:'Nunito',sans-serif;background:#F2F5F3;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:0;}
 
-/* RESET */
+/* ── Card shell ───────────────────────────────────────── */
+.shell{width:100%;max-width:520px;background:#fff;display:flex;flex-direction:column;min-height:100vh;box-shadow:0 0 40px rgba(0,0,0,.06);}
 
-*,*::before,*::after{
-box-sizing:border-box;
-margin:0;
-padding:0;
--webkit-tap-highlight-color:transparent;
+/* ── Header ───────────────────────────────────────────── */
+.hdr{background:linear-gradient(150deg,#0C4726 0%,#1C6E42 55%,#239152 100%);padding:22px 20px 24px;position:relative;overflow:hidden;flex-shrink:0;}
+.hdr::after{content:'🥭';position:absolute;right:-16px;top:-20px;font-size:130px;opacity:.07;pointer-events:none;transform:rotate(-12deg);}
+
+/* Logo row — full-width wide logo image */
+.logo-row{display:flex;flex-direction:column;align-items:flex-start;gap:10px;margin-bottom:16px;position:relative;z-index:1;}
+.logo-box{width:100%;max-width:150px;height:60px;border-radius:13px;background:#fff;padding:5px 14px;box-shadow:0 5px 20px rgba(0,0,0,.22),0 0 0 3px rgba(245,166,35,.5);display:flex;align-items:center;justify-content:flex-start;overflow:hidden;}
+.logo-box img{width:auto;max-width:100%;height:100%;object-fit:contain;object-position:left center;display:block;}
+.logo-fb{font-size:34px;line-height:1;display:none;}
+.brand{display:flex;flex-direction:column;gap:1px;}
+.brand-n{font-size:16px;font-weight:900;color:#fff;line-height:1.25;letter-spacing:-.2px;}
+.brand-n span{color:#F5A623;}
+.brand-s{font-size:9px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:1.4px;text-transform:uppercase;}
+
+/* Header text */
+.hdr-body{position:relative;z-index:1;}
+.badge{display:inline-flex;align-items:center;gap:4px;background:#F5A623;color:#111;font-size:10px;font-weight:800;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;}
+.hdr-t{font-size:18px;font-weight:800;color:#fff;line-height:1.3;margin-bottom:3px;}
+.hdr-s{font-size:12px;font-weight:600;color:rgba(255,255,255,.6);}
+
+/* ── Progress ─────────────────────────────────────────── */
+.prog{padding:14px 20px 0;background:#fff;flex-shrink:0;}
+.prog-row{display:flex;align-items:center;margin-bottom:14px;}
+.pd{display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;}
+.pd-d{width:28px;height:28px;border-radius:50%;background:#E2ECE7;border:2px solid #E2ECE7;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#888;transition:all .3s cubic-bezier(.34,1.56,.64,1);position:relative;z-index:1;}
+.pd.act .pd-d{background:#F5A623;border-color:#F5A623;color:#111;box-shadow:0 0 0 5px rgba(245,166,35,.2);transform:scale(1.1);}
+.pd.dn .pd-d{background:#1C6E42;border-color:#1C6E42;color:#fff;}
+.pd-l{font-size:9px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;}
+.pd.act .pd-l{color:#D4871A;}
+.pd.dn .pd-l{color:#1C6E42;}
+.pline{flex:1;height:3px;background:#E2ECE7;border-radius:4px;margin-bottom:12px;transition:background .4s;}
+.pline.on{background:#F5A623;}
+
+/* ── Form scroll ──────────────────────────────────────── */
+.fbody{flex:1;padding:18px 20px 24px;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+.step{display:none;}
+.step.on{display:block;animation:sIn .3s ease both;}
+@keyframes sIn{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:translateX(0)}}
+
+.stitle{font-size:19px;font-weight:900;color:#111;margin-bottom:3px;}
+.ssub{font-size:12px;font-weight:500;color:#888;margin-bottom:18px;line-height:1.5;}
+
+/* Fields */
+.fld{margin-bottom:13px;}
+.flbl{font-size:11px;font-weight:800;color:#444;margin-bottom:6px;display:flex;align-items:center;gap:3px;text-transform:uppercase;letter-spacing:.4px;}
+.req{color:#D4871A;}
+.irow{display:flex;align-items:center;border:2px solid #E2ECE7;border-radius:13px;background:#fff;transition:border-color .2s,box-shadow .2s;overflow:hidden;min-height:52px;}
+.irow:focus-within{border-color:#239152;box-shadow:0 0 0 4px rgba(35,145,82,.12);}
+.irow.err{border-color:#D93025;box-shadow:0 0 0 4px rgba(217,48,37,.09);}
+.iico{padding:0 10px 0 13px;font-size:18px;flex-shrink:0;}
+input,select,textarea{flex:1;height:52px;padding:0 13px 0 2px;border:none;outline:none;background:transparent;font-family:'Nunito',sans-serif;font-size:16px;font-weight:700;color:#111;-webkit-appearance:none;appearance:none;}
+input::placeholder,textarea::placeholder{color:#C5CEC9;font-weight:500;}
+textarea{height:auto;min-height:80px;padding:12px 13px 12px 2px;resize:none;line-height:1.5;}
+select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.7' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:38px;}
+.etxt{display:none;font-size:11px;font-weight:700;color:#D93025;margin-top:4px;padding-left:2px;}
+.etxt.on{display:block;animation:shk .3s ease;}
+@keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+
+/* Family grid */
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+.fc{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:12px 8px 10px;border:2px solid #E2ECE7;border-radius:13px;background:#fff;cursor:pointer;position:relative;transition:all .2s;user-select:none;-webkit-user-select:none;min-height:82px;}
+.fc input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none;}
+.fc-emo{font-size:26px;line-height:1;}
+.fc-lbl{font-size:12px;font-weight:800;color:#444;text-align:center;}
+.fc-chk{position:absolute;top:7px;right:7px;width:18px;height:18px;border-radius:50%;border:2px solid #E2ECE7;background:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;color:transparent;transition:all .2s;}
+.fc.sel{border-color:#1C6E42;background:#EAF5F0;box-shadow:0 0 0 3px rgba(28,110,66,.12);}
+.fc.sel .fc-lbl{color:#1C6E42;}
+.fc.sel .fc-chk{background:#1C6E42;border-color:#1C6E42;color:#fff;}
+.fc.ferr{border-color:#D93025;}
+
+/* Slot tiles */
+.slots{display:flex;flex-direction:column;gap:9px;}
+.stile{display:flex;align-items:center;gap:12px;padding:13px 15px;border:2px solid #E2ECE7;border-radius:13px;background:#fff;cursor:pointer;transition:all .2s;font-family:'Nunito',sans-serif;text-align:left;width:100%;}
+.stile:active{transform:scale(.98);}
+.s-emo{font-size:24px;flex-shrink:0;}
+.s-body{flex:1;}
+.s-t{font-size:14px;font-weight:800;color:#111;display:block;}
+.s-d{font-size:11px;font-weight:500;color:#888;}
+.s-chk{width:22px;height:22px;border-radius:50%;border:2px solid #E2ECE7;display:flex;align-items:center;justify-content:center;font-size:10px;color:transparent;transition:all .2s;flex-shrink:0;}
+.stile.sel{border-color:#1C6E42;background:#EAF5F0;box-shadow:0 0 0 3px rgba(28,110,66,.12);}
+.stile.sel .s-t{color:#1C6E42;}
+.stile.sel .s-chk{background:#1C6E42;border-color:#1C6E42;color:#fff;}
+.stile.serr{border-color:#D93025;}
+
+/* Buttons */
+.nav{display:flex;gap:9px;margin-top:20px;}
+.bbk{height:52px;padding:0 16px;border:2px solid #E2ECE7;border-radius:13px;background:#fff;color:#444;font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:4px;flex-shrink:0;}
+.bbk:active{transform:scale(.97);}
+.bnx{flex:1;height:52px;border:none;border-radius:13px;background:linear-gradient(135deg,#1C6E42,#239152);color:#fff;font-family:'Nunito',sans-serif;font-size:15px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;box-shadow:0 5px 16px rgba(28,110,66,.28);transition:all .2s;letter-spacing:.1px;}
+.bnx:active{transform:scale(.98);}
+.bnx:disabled{opacity:.65;cursor:not-allowed;transform:none;}
+.spin{width:18px;height:18px;border:2.5px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;display:none;}
+.bnx.ld .spin{display:block;}
+.bnx.ld .bl{display:none;}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* Success */
+.succ{display:none;flex-direction:column;align-items:center;padding:32px 20px 28px;text-align:center;}
+.succ.on{display:flex;animation:fup .5s ease both;}
+@keyframes fup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.s-ico{width:80px;height:80px;border-radius:50%;background:#EAF5F0;display:flex;align-items:center;justify-content:center;font-size:38px;margin-bottom:16px;animation:pop .5s cubic-bezier(.34,1.56,.64,1) .1s both;}
+@keyframes pop{from{transform:scale(.3);opacity:0}to{transform:scale(1);opacity:1}}
+.s-ttl{font-size:22px;font-weight:900;color:#111;margin-bottom:6px;}
+.s-msg{font-size:13px;font-weight:500;color:#888;line-height:1.6;margin-bottom:18px;}
+.bkcard{width:100%;background:#FFF8EE;border:1.5px solid rgba(245,166,35,.3);border-radius:13px;padding:14px 16px;text-align:left;margin-bottom:16px;}
+.bkrow{display:flex;align-items:flex-start;gap:9px;font-size:13px;font-weight:600;color:#444;padding:3px 0;}
+.bkrow strong{color:#111;font-weight:800;}
+.rd-lbl{font-size:12px;font-weight:600;color:#888;margin-bottom:7px;}
+.rd-wrap{width:100%;height:4px;background:#E2ECE7;border-radius:4px;overflow:hidden;margin-bottom:16px;}
+.rd-bar{height:100%;width:0%;background:linear-gradient(90deg,#1C6E42,#239152);border-radius:4px;transition:width 5s linear;}
+.bsite{width:100%;height:50px;border:2.5px solid #1C6E42;border-radius:13px;background:transparent;color:#1C6E42;font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:7px;}
+.bsite:hover{background:#EAF5F0;}
+
+/* Footer */
+.ftr{padding:13px 20px 18px;border-top:1.5px solid #E2ECE7;flex-shrink:0;}
+.ftr-off{display:flex;align-items:flex-start;gap:9px;margin-bottom:11px;}
+.ftr-ico{font-size:16px;flex-shrink:0;margin-top:1px;}
+.ftr-txt{font-size:11px;font-weight:600;color:#888;line-height:1.55;}
+.ftr-txt strong{color:#444;font-weight:800;}
+.mapa{display:inline-flex;align-items:center;gap:3px;color:#1C6E42;font-size:11px;font-weight:800;text-decoration:none;margin-top:1px;}
+.mapa:hover{text-decoration:underline;}
+.srow{display:flex;gap:8px;}
+.spill{flex:1;height:36px;border:1.5px solid #E2ECE7;border-radius:9px;display:flex;align-items:center;justify-content:center;gap:4px;font-size:11px;font-weight:800;color:#444;text-decoration:none;transition:all .2s;}
+.spill:hover{border-color:#1C6E42;color:#1C6E42;background:#EAF5F0;}
+
+@media(min-width:541px){
+  body{padding:20px 16px;background:#E8EDE9;}
+  .shell{min-height:auto;border-radius:20px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.10);}
 }
-
-html{
--webkit-text-size-adjust:100%;
-}
-
-body{
-font-family:'Nunito',sans-serif;
-background:#F2F5F3;
-min-height:100vh;
-display:flex;
-align-items:flex-start;
-justify-content:center;
-padding:0;
-}
-
-/* CARD */
-
-.shell{
-width:100%;
-max-width:520px;
-background:#fff;
-display:flex;
-flex-direction:column;
-min-height:100vh;
-box-shadow:0 0 40px rgba(0,0,0,.06);
-}
-
-/* HEADER */
-
-.hdr{
-background:linear-gradient(150deg,#0C4726 0%,#1C6E42 55%,#239152 100%);
-padding:22px 20px 24px;
-position:relative;
-overflow:hidden;
-flex-shrink:0;
-}
-
-.hdr::after{
-content:'🥭';
-position:absolute;
-right:-16px;
-top:-20px;
-font-size:130px;
-opacity:.07;
-pointer-events:none;
-transform:rotate(-12deg);
-}
-
-/* LOGO */
-
-.logo-row{
-display:flex;
-flex-direction:column;
-align-items:flex-start;
-gap:10px;
-margin-bottom:16px;
-position:relative;
-z-index:1;
-}
-
-.logo-box{
-width:100%;
-max-width:150px;
-height:60px;
-border-radius:13px;
-background:#fff;
-padding:5px 14px;
-box-shadow:0 5px 20px rgba(0,0,0,.22),0 0 0 3px rgba(245,166,35,.5);
-display:flex;
-align-items:center;
-justify-content:flex-start;
-overflow:hidden;
-}
-
-.logo-box img{
-width:auto;
-max-width:100%;
-height:100%;
-object-fit:contain;
-object-position:left center;
-display:block;
-}
-
-.brand{
-display:flex;
-flex-direction:column;
-gap:1px;
-}
-
-.brand-n{
-font-size:16px;
-font-weight:900;
-color:#fff;
-line-height:1.25;
-letter-spacing:-.2px;
-}
-
-.brand-n span{
-color:#F5A623;
-}
-
-.brand-s{
-font-size:9px;
-font-weight:700;
-color:rgba(255,255,255,.5);
-letter-spacing:1.4px;
-text-transform:uppercase;
-}
-
-/* HEADER TEXT */
-
-.hdr-body{
-position:relative;
-z-index:1;
-}
-
-.badge{
-display:inline-flex;
-align-items:center;
-gap:4px;
-background:#F5A623;
-color:#111;
-font-size:10px;
-font-weight:800;
-padding:3px 10px;
-border-radius:20px;
-text-transform:uppercase;
-letter-spacing:.5px;
-margin-bottom:8px;
-}
-
-.hdr-t{
-font-size:18px;
-font-weight:800;
-color:#fff;
-line-height:1.3;
-margin-bottom:3px;
-}
-
-.hdr-s{
-font-size:12px;
-font-weight:600;
-color:rgba(255,255,255,.6);
-}
-
-/* PROGRESS */
-
-.prog{
-padding:14px 20px 0;
-background:#fff;
-flex-shrink:0;
-}
-
-.prog-row{
-display:flex;
-align-items:center;
-margin-bottom:14px;
-}
-
-.pd{
-display:flex;
-flex-direction:column;
-align-items:center;
-gap:4px;
-flex-shrink:0;
-}
-
-.pd-d{
-width:28px;
-height:28px;
-border-radius:50%;
-background:#E2ECE7;
-border:2px solid #E2ECE7;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:11px;
-font-weight:800;
-color:#888;
-}
-
-.pd.act .pd-d{
-background:#F5A623;
-border-color:#F5A623;
-color:#111;
-}
-
-.pline{
-flex:1;
-height:3px;
-background:#E2ECE7;
-border-radius:4px;
-margin-bottom:12px;
-}
-
-/* FORM */
-
-.fbody{
-flex:1;
-padding:18px 20px 24px;
-overflow-y:auto;
-}
-
-.step{
-display:none;
-}
-
-.step.on{
-display:block;
-}
-
-.stitle{
-font-size:19px;
-font-weight:900;
-color:#111;
-margin-bottom:3px;
-}
-
-.ssub{
-font-size:12px;
-font-weight:500;
-color:#888;
-margin-bottom:18px;
-}
-
-/* INPUTS */
-
-.fld{
-margin-bottom:13px;
-}
-
-.flbl{
-font-size:11px;
-font-weight:800;
-color:#444;
-margin-bottom:6px;
-}
-
-.irow{
-display:flex;
-align-items:center;
-border:2px solid #E2ECE7;
-border-radius:13px;
-background:#fff;
-min-height:52px;
-}
-
-.iico{
-padding:0 10px 0 13px;
-font-size:18px;
-flex-shrink:0;
-}
-
-input,select,textarea{
-flex:1;
-height:52px;
-padding:0 13px 0 2px;
-border:none;
-outline:none;
-background:transparent;
-font-family:'Nunito',sans-serif;
-font-size:16px;
-font-weight:700;
-color:#111;
-}
-
-textarea{
-height:auto;
-min-height:80px;
-padding:12px 13px 12px 2px;
-}
-
-/* BUTTONS */
-
-.nav{
-display:flex;
-gap:9px;
-margin-top:20px;
-}
-
-.bnx{
-flex:1;
-height:52px;
-border:none;
-border-radius:13px;
-background:linear-gradient(135deg,#1C6E42,#239152);
-color:#fff;
-font-family:'Nunito',sans-serif;
-font-size:15px;
-font-weight:900;
-cursor:pointer;
-}
-
-.bbk{
-height:52px;
-padding:0 16px;
-border:2px solid #E2ECE7;
-border-radius:13px;
-background:#fff;
-font-weight:800;
-}
-
-/* SUCCESS */
-
-.succ{
-display:none;
-flex-direction:column;
-align-items:center;
-padding:32px 20px 28px;
-text-align:center;
-}
-
-.succ.on{
-display:flex;
-}
-
-.s-ico{
-width:80px;
-height:80px;
-border-radius:50%;
-background:#EAF5F0;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:38px;
-margin-bottom:16px;
-}
-
-.s-ttl{
-font-size:22px;
-font-weight:900;
-color:#111;
-margin-bottom:6px;
-}
-
-.s-msg{
-font-size:13px;
-color:#888;
-margin-bottom:18px;
-}
-
-.bkcard{
-width:100%;
-background:#FFF8EE;
-border:1.5px solid rgba(245,166,35,.3);
-border-radius:13px;
-padding:14px 16px;
-text-align:left;
-margin-bottom:16px;
-}
-
-.bkrow{
-display:flex;
-align-items:flex-start;
-gap:9px;
-font-size:13px;
-font-weight:600;
-color:#444;
-padding:3px 0;
-}
-
-.bsite{
-width:100%;
-height:50px;
-border:2.5px solid #1C6E42;
-border-radius:13px;
-background:transparent;
-color:#1C6E42;
-font-weight:800;
-cursor:pointer;
-}
-
 </style>
 </head>
 <body>
 <div class="shell">
 
-<!-- HEADER -->
-
-<div class="hdr">
-<div class="logo-row">
-
-<div class="logo-box">
-<img src="https://image2url.com/r2/default/images/1772695630502-388ce269-d3e8-4880-9fd3-802b5f8e808c.jfif">
-</div>
-
-<div class="brand">
-<div class="brand-n"><span>MangoTree</span> Insurance & Investments</div>
-<div class="brand-s">Vaishali NCR</div>
-</div>
-
-</div>
-
-<div class="hdr-body">
-
-<div class="badge">🎁 100% Free</div>
-
-<div class="hdr-t">
-Free Health Insurance Consultation
-</div>
-
-<div class="hdr-s">
-Aam ke Aam 🥭 Guthliyon ke Daam
-</div>
-
-</div>
-</div>
-
-<!-- PROGRESS -->
-
-<div class="prog" id="progWrap">
-<div class="prog-row">
-
-<div class="pd act">
-<div class="pd-d">1</div>
-</div>
-
-<div class="pline"></div>
-
-<div class="pd">
-<div class="pd-d">2</div>
-</div>
-
-<div class="pline"></div>
-
-<div class="pd">
-<div class="pd-d">3</div>
-</div>
-
-</div>
-</div>
-<!-- FORM BODY -->
-
-<div class="fbody" id="fbody">
-
-<!-- STEP 1 -->
-
-<div class="step on" id="s1">
-
-<div class="stitle">Nice to meet you 👋</div>
-<div class="ssub">We'll send your booking confirmation to your email.</div>
-
-<div class="fld">
-<div class="flbl">Full Name *</div>
-<div class="irow" id="ir-name">
-<span class="iico">👤</span>
-<input id="name" type="text" placeholder="e.g. Priya Sharma">
-</div>
-</div>
-
-<div class="fld">
-<div class="flbl">Mobile Number *</div>
-<div class="irow" id="ir-phone">
-<span class="iico">📱</span>
-<input id="phone" type="tel" placeholder="10-digit number">
-</div>
-</div>
-
-<div class="fld">
-<div class="flbl">Email Address *</div>
-<div class="irow" id="ir-email">
-<span class="iico">✉️</span>
-<input id="email" type="email" placeholder="you@example.com">
-</div>
-</div>
-
-<div class="fld">
-<div class="flbl">City</div>
-<div class="irow">
-<span class="iico">🌆</span>
-<input id="city" type="text" placeholder="e.g. Ghaziabad">
-</div>
-</div>
-
-<div class="nav">
-<button class="bnx" id="btn1">Continue →</button>
-</div>
-
-</div>
-
-
-<!-- STEP 2 -->
-
-<div class="step" id="s2">
-
-<div class="stitle">Coverage details 🛡️</div>
-
-<div class="fld">
-
-<div class="flbl">Coverage Amount *</div>
-
-<div class="irow">
-<span class="iico">💰</span>
-
-<select id="cov">
-
-<option value="" disabled selected>Select coverage</option>
-<option>Below ₹5 lakh</option>
-<option>₹5 lakh</option>
-<option>₹10 lakh</option>
-<option>₹15 lakh or more</option>
-<option>No current policy</option>
-
-</select>
-
-</div>
-
-</div>
-
-<div class="nav">
-
-<button class="bbk" id="back2">← Back</button>
-<button class="bnx" id="btn2">Continue →</button>
-
-</div>
-
-</div>
-
-
-<!-- STEP 3 -->
-
-<div class="step" id="s3">
-
-<div class="stitle">Pick a time 📅</div>
-
-<div class="slots">
-
-<button class="stile" data-slot="11 AM – 1 PM">
-<span class="s-t">11 AM – 1 PM</span>
-</button>
-
-<button class="stile" data-slot="1:30 PM – 3:30 PM">
-<span class="s-t">1:30 PM – 3:30 PM</span>
-</button>
-
-<button class="stile" data-slot="4 PM – 6:30 PM">
-<span class="s-t">4 PM – 6:30 PM</span>
-</button>
-
-</div>
-
-<div class="fld">
-
-<div class="flbl">Questions (optional)</div>
-
-<div class="irow">
-<textarea id="qs"></textarea>
-</div>
-
-</div>
-
-<div class="nav">
-
-<button class="bbk" id="back3">← Back</button>
-<button class="bnx" id="subBtn">Book Now</button>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- SUCCESS SCREEN -->
-
-<div class="succ" id="succScreen">
-
-<div class="s-ico">✅</div>
-
-<div class="s-ttl">Consultation Booked!</div>
-
-<div class="s-msg">
-You're all set! A confirmation email is on its way.
-</div>
-
-<div class="bkcard" id="bkCard"></div>
-
-<!-- BACKUP WHATSAPP BUTTON -->
-
-<button class="bsite" id="waBtn">
-💬 Confirm on WhatsApp
-</button>
-
-<div class="rd-lbl">
-Taking you to our website in <strong id="cdN">5</strong>s…
-</div>
-
-<div class="rd-wrap">
-<div class="rd-bar" id="rdBar"></div>
-</div>
-
-<button class="bsite" onclick="goSite()">
-🌐 Visit MangoTree Website
-</button>
-
-</div>
-
-
-</div>
-
+  <!-- HEADER -->
+  <div class="hdr">
+    <div class="logo-row">
+      <div class="logo-box">
+        <img src="https://image2url.com/r2/default/images/1772695630502-388ce269-d3e8-4880-9fd3-802b5f8e808c.jfif"
+             alt="MangoTree Insurance"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span class="logo-fb">🥭</span>
+      </div>
+      <div class="brand">
+        <div class="brand-n"><span>MangoTree</span> Insurance &amp; Investments</div>
+        <div class="brand-s">Vaishali, NCR · Est. Ghaziabad</div>
+      </div>
+    </div>
+    <div class="hdr-body">
+      <div class="badge">🎁 100% Free</div>
+      <div class="hdr-t">Free Health Insurance Consultation</div>
+      <div class="hdr-s">Aam ke Aam 🥭 Guthliyon ke Daam — Smart cover, zero jargon</div>
+    </div>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="prog" id="progWrap">
+    <div class="prog-row">
+      <div class="pd act" id="pd1"><div class="pd-d">1</div><div class="pd-l">You</div></div>
+      <div class="pline" id="pl1"></div>
+      <div class="pd" id="pd2"><div class="pd-d">2</div><div class="pd-l">Coverage</div></div>
+      <div class="pline" id="pl2"></div>
+      <div class="pd" id="pd3"><div class="pd-d">3</div><div class="pd-l">Schedule</div></div>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <div class="fbody" id="fbody">
+
+    <!-- Step 1 -->
+    <div class="step on" id="s1">
+      <div class="stitle">Nice to meet you 👋</div>
+      <div class="ssub">We'll send your booking confirmation to your email.</div>
+
+      <div class="fld">
+        <div class="flbl">Full Name <span class="req">*</span></div>
+        <div class="irow" id="ir-name"><span class="iico">👤</span>
+          <input id="name" type="text" placeholder="e.g. Priya Sharma" autocomplete="name" inputmode="text">
+        </div>
+        <div class="etxt" id="e-name">Please enter your full name.</div>
+      </div>
+
+      <div class="fld">
+        <div class="flbl">Mobile Number <span class="req">*</span></div>
+        <div class="irow" id="ir-phone"><span class="iico">📱</span>
+          <input id="phone" type="tel" placeholder="10-digit number" maxlength="10" inputmode="numeric" autocomplete="tel">
+        </div>
+        <div class="etxt" id="e-phone">Enter a valid 10-digit number.</div>
+      </div>
+
+      <div class="fld">
+        <div class="flbl">Email Address <span class="req">*</span></div>
+        <div class="irow" id="ir-email"><span class="iico">✉️</span>
+          <input id="email" type="email" placeholder="you@example.com" autocomplete="email" inputmode="email">
+        </div>
+        <div class="etxt" id="e-email">Enter a valid email address.</div>
+      </div>
+
+      <div class="fld">
+        <div class="flbl">City</div>
+        <div class="irow"><span class="iico">🌆</span>
+          <input id="city" type="text" placeholder="e.g. Ghaziabad" autocomplete="address-level2" inputmode="text">
+        </div>
+      </div>
+
+      <div class="nav">
+        <button class="bnx" id="btn1"><span class="bl">Continue →</span><div class="spin"></div></button>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step" id="s2">
+      <div class="stitle">Coverage details 🛡️</div>
+      <div class="ssub">Tap all family members who need coverage.</div>
+
+      <div class="fld">
+        <div class="flbl">Current Coverage Amount <span class="req">*</span></div>
+        <div class="irow" id="ir-cov"><span class="iico">💰</span>
+          <select id="cov">
+            <option value="" disabled selected>Select coverage amount</option>
+            <option>Below ₹5 lakh</option>
+            <option>₹5 lakh</option>
+            <option>₹10 lakh</option>
+            <option>₹15 lakh or more</option>
+            <option>Not sure / No current policy</option>
+          </select>
+        </div>
+        <div class="etxt" id="e-cov">Please select a coverage amount.</div>
+      </div>
+
+      <div class="fld">
+        <div class="flbl">Who needs to be covered? <span class="req">*</span> <span style="color:#888;font-weight:600;text-transform:none;letter-spacing:0;">(Select all)</span></div>
+        <div class="fgrid" id="famGrid">
+          <label class="fc" data-val="Self">
+            <input type="checkbox" name="fam" value="Self">
+            <span class="fc-emo">🧑</span><span class="fc-lbl">Self</span><span class="fc-chk">✓</span>
+          </label>
+          <label class="fc" data-val="Spouse">
+            <input type="checkbox" name="fam" value="Spouse">
+            <span class="fc-emo">💑</span><span class="fc-lbl">Spouse</span><span class="fc-chk">✓</span>
+          </label>
+          <label class="fc" data-val="Children">
+            <input type="checkbox" name="fam" value="Children">
+            <span class="fc-emo">👶</span><span class="fc-lbl">Children</span><span class="fc-chk">✓</span>
+          </label>
+          <label class="fc" data-val="Parents">
+            <input type="checkbox" name="fam" value="Parents">
+            <span class="fc-emo">👴👵</span><span class="fc-lbl">Parents</span><span class="fc-chk">✓</span>
+          </label>
+          <label class="fc" data-val="In-Laws">
+            <input type="checkbox" name="fam" value="In-Laws">
+            <span class="fc-emo">🏠</span><span class="fc-lbl">In-Laws</span><span class="fc-chk">✓</span>
+          </label>
+          <label class="fc" data-val="Siblings">
+            <input type="checkbox" name="fam" value="Siblings">
+            <span class="fc-emo">🧑‍🤝‍🧑</span><span class="fc-lbl">Siblings</span><span class="fc-chk">✓</span>
+          </label>
+        </div>
+        <div class="etxt" id="e-fam">Please select at least one member.</div>
+      </div>
+
+      <div class="nav">
+        <button class="bbk" id="back2">← Back</button>
+        <button class="bnx" id="btn2"><span class="bl">Continue →</span><div class="spin"></div></button>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step" id="s3">
+      <div class="stitle">Pick a time 📅</div>
+      <div class="ssub">Choose when to meet us at our Vaishali office.</div>
+
+      <div class="fld">
+        <div class="flbl">Preferred Meeting Time <span class="req">*</span></div>
+        <div class="slots">
+          <button type="button" class="stile" data-slot="11 AM – 1 PM">
+            <span class="s-emo">🌤️</span>
+            <span class="s-body"><span class="s-t">11 AM – 1 PM</span><span class="s-d">Morning session</span></span>
+            <span class="s-chk">✓</span>
+          </button>
+          <button type="button" class="stile" data-slot="1:30 PM – 3:30 PM">
+            <span class="s-emo">☀️</span>
+            <span class="s-body"><span class="s-t">1:30 PM – 3:30 PM</span><span class="s-d">Afternoon session</span></span>
+            <span class="s-chk">✓</span>
+          </button>
+          <button type="button" class="stile" data-slot="4 PM – 6:30 PM">
+            <span class="s-emo">🌇</span>
+            <span class="s-body"><span class="s-t">4 PM – 6:30 PM</span><span class="s-d">Evening session</span></span>
+            <span class="s-chk">✓</span>
+          </button>
+        </div>
+        <div class="etxt" id="e-slot">Please choose a time slot.</div>
+      </div>
+
+      <div class="fld">
+        <div class="flbl">Any questions? <span style="color:#888;font-weight:600;text-transform:none;letter-spacing:0;">(Optional)</span></div>
+        <div class="irow" style="align-items:flex-start;">
+          <span class="iico" style="padding-top:14px;">💬</span>
+          <textarea id="qs" placeholder="E.g. I want to compare my current plan…"></textarea>
+        </div>
+      </div>
+
+      <div class="nav">
+        <button class="bbk" id="back3">← Back</button>
+        <button class="bnx" id="subBtn"><span class="bl">✅ Book Now</span><div class="spin"></div></button>
+      </div>
+    </div>
+
+  </div><!-- /fbody -->
+
+  <!-- SUCCESS -->
+  <div class="succ" id="succScreen">
+    <div class="s-ico">✅</div>
+    <div class="s-ttl">Consultation Booked!</div>
+    <div class="s-msg">You're all set! A confirmation email is on its way.<br>Please carry your existing policy documents if you have them.</div>
+    <div class="bkcard" id="bkCard"></div>
+    <div class="rd-lbl">Taking you to our website in <strong id="cdN">5</strong>s…</div>
+    <div class="rd-wrap"><div class="rd-bar" id="rdBar"></div></div>
+    <button class="bsite" onclick="goSite()">🌐 Visit MangoTree Website</button>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="ftr" id="ftr">
+    <div class="ftr-off">
+      <span class="ftr-ico">🏢</span>
+      <div class="ftr-txt">
+        <strong>MangoTree Insurance &amp; Investments</strong><br>
+        324, Cloud 9, Vaishali – 201010
+        <br><a class="mapa" href="https://maps.app.goo.gl/g95Y4mkAmH3YFw348" target="_blank">📍 Open in Google Maps</a>
+      </div>
+    </div>
+    <div class="srow">
+      <a class="spill" href="https://www.instagram.com/mangotreeinsurance?igsh=MWp0bnJ3b2hsaTZq" target="_blank">📸 Instagram</a>
+      <a class="spill" href="https://www.facebook.com/amit.jain.40301/?rdid=2kO7UaxDysLDwQiI" target="_blank">ⓕ Facebook</a>
+      <a class="spill" href="https://mangotreeinsurance.com/" target="_blank">🌐 Website</a>
+    </div>
+  </div>
+
+</div><!-- /shell -->
 
 <script>
+// ── Your Apps Script Web App URL ─────────────────────────────────────────────
+var GAS_URL = "https://script.google.com/macros/s/AKfycbzEWQJcg4bffzaOmdIFSiKa2AxLU5RjvwjpDKLLAPMdmfv4OsKX7c44MsLGJAUwOkqMyA/exec";
+var SITE    = "https://mangotreeinsurance.com/";
+// ─────────────────────────────────────────────────────────────────────────────
 
-/* CONFIG */
+var curStep = 1, selSlot = "";
 
-var GAS_URL="https://script.google.com/macros/s/AKfycbzEWQJcg4bffzaOmdIFSiKa2AxLU5RjvwjpDKLLAPMdmfv4OsKX7c44MsLGJAUwOkqMyA/exec";
-
-var SITE="https://mangotreeinsurance.com/";
-
-var WHATSAPP_NUMBER="919911502502";
-
-
-var curStep=1;
-var selSlot="";
-
-
-function showStep(n){
-
-document.querySelectorAll('.step').forEach(function(s){
-s.classList.remove('on');
-});
-
-document.getElementById('s'+n).classList.add('on');
-
-curStep=n;
-
+// ── Step navigation ───────────────────────────────────────────────────────────
+function showStep(n) {
+  document.querySelectorAll('.step').forEach(function(s){s.classList.remove('on');});
+  document.getElementById('s'+n).classList.add('on');
+  curStep = n;
+  syncProg();
+  document.getElementById('fbody').scrollTop = 0;
+  window.scrollTo(0,0);
+}
+function syncProg() {
+  [1,2,3].forEach(function(i){
+    var pd = document.getElementById('pd'+i);
+    pd.classList.remove('act','dn');
+    pd.querySelector('.pd-d').textContent = i < curStep ? '✓' : i;
+    if(i < curStep)  pd.classList.add('dn');
+    if(i === curStep) pd.classList.add('act');
+  });
+  [1,2].forEach(function(i){
+    document.getElementById('pl'+i).classList.toggle('on', curStep > i);
+  });
 }
 
+// ── Validation ────────────────────────────────────────────────────────────────
+function isEmail(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);}
+function isPhone(v){return /^\d{10}$/.test(v.trim());}
+function setF(rid,eid,bad){
+  var r=document.getElementById(rid),e=document.getElementById(eid);
+  if(bad){if(r)r.classList.add('err');if(e)e.classList.add('on');}
+  else{if(r)r.classList.remove('err');if(e)e.classList.remove('on');}
+}
+function v1(){
+  var n=document.getElementById('name').value.trim(),
+      p=document.getElementById('phone').value.trim(),
+      em=document.getElementById('email').value.trim(),ok=true;
+  setF('ir-name','e-name',!n);       if(!n)       ok=false;
+  setF('ir-phone','e-phone',!isPhone(p)); if(!isPhone(p)) ok=false;
+  setF('ir-email','e-email',!isEmail(em)); if(!isEmail(em)) ok=false;
+  return ok;
+}
+function v2(){
+  var c=document.getElementById('cov').value,
+      f=document.querySelectorAll('input[name="fam"]:checked'),ok=true;
+  setF('ir-cov','e-cov',!c); if(!c) ok=false;
+  if(f.length===0){
+    document.querySelectorAll('.fc').forEach(function(fc){fc.classList.add('ferr');});
+    document.getElementById('e-fam').classList.add('on');
+    ok=false;
+  }
+  return ok;
+}
+function v3(){
+  if(!selSlot){
+    document.querySelectorAll('.stile').forEach(function(t){t.classList.add('serr');});
+    document.getElementById('e-slot').classList.add('on');
+    return false;
+  }
+  return true;
+}
 
-/* DATA */
-
+// ── Collect data ──────────────────────────────────────────────────────────────
 function getData(){
-
-return{
-
-name:document.getElementById('name').value.trim(),
-phone:document.getElementById('phone').value.trim(),
-email:document.getElementById('email').value.trim(),
-city:document.getElementById('city').value.trim(),
-coverage:document.getElementById('cov').value,
-meetingTime:selSlot,
-questions:document.getElementById('qs').value.trim()
-
-};
-
+  var fam=Array.from(document.querySelectorAll('input[name="fam"]:checked')).map(function(c){return c.value;});
+  return{
+    name:    document.getElementById('name').value.trim(),
+    phone:   document.getElementById('phone').value.trim(),
+    email:   document.getElementById('email').value.trim(),
+    city:    document.getElementById('city').value.trim(),
+    coverage:document.getElementById('cov').value,
+    family:  fam.join(', '),
+    meetingTime: selSlot,
+    questions: document.getElementById('qs').value.trim()
+  };
 }
 
-
-/* WHATSAPP MESSAGE */
-
-function buildWhatsAppURL(data){
-
-var msg=
-"Hello MangoTree Insurance 🥭%0A%0A"+
-"I just booked a consultation.%0A%0A"+
-"👤 Name: "+encodeURIComponent(data.name)+"%0A"+
-"📱 Phone: "+encodeURIComponent(data.phone)+"%0A"+
-"⏰ Time: "+encodeURIComponent(data.meetingTime)+"%0A"+
-(data.city?"🌆 City: "+encodeURIComponent(data.city)+"%0A":"")+
-"%0APlease confirm my appointment.";
-
-return "https://wa.me/"+WHATSAPP_NUMBER+"?text="+msg;
-
-}
-
-
-/* SUBMIT */
-
+// ── Submit — GET request with URL params (works cross-origin, no CORS issues) ─
+// POST+no-cors doesn't actually send data to Apps Script from external domains.
+// GET requests with URL params work perfectly and bypass all CORS restrictions.
 function doSubmit(){
+  if(!v1()||!v2()||!v3()) return;
+  var data = getData();
+  var btn  = document.getElementById('subBtn');
+  btn.classList.add('ld'); btn.disabled = true;
 
-var data=getData();
+  // Build URL with all form data as query parameters
+  var params = new URLSearchParams({
+    name:        data.name,
+    phone:       data.phone,
+    email:       data.email,
+    city:        data.city,
+    coverage:    data.coverage,
+    family:      data.family,
+    meetingTime: data.meetingTime,
+    questions:   data.questions
+  });
 
-var params=new URLSearchParams(data);
+  // Use an image tag trick — fires a GET to Apps Script with zero CORS issues
+  // Apps Script doGet() receives the params, saves to Sheet, sends emails
+  var img = new Image();
+  img.onload = img.onerror = function(){ showSucc(data); };
+  img.src = GAS_URL + '?action=submit&' + params.toString();
 
-var img=new Image();
-
-img.onload=img.onerror=function(){
-
-showSucc(data);
-
-};
-
-img.src=GAS_URL+'?action=submit&'+params.toString();
-
+  // Fallback: show success after 4 seconds even if image never loads
+  setTimeout(function(){
+    if(btn.classList.contains('ld')){ showSucc(data); }
+  }, 4000);
 }
 
-
-/* SUCCESS */
-
+// ── Success screen + countdown redirect ──────────────────────────────────────
 function showSucc(data){
+  document.getElementById('progWrap').style.display = 'none';
+  document.getElementById('fbody').style.display    = 'none';
+  document.getElementById('ftr').style.display      = 'none';
+  var ss = document.getElementById('succScreen');
+  ss.classList.add('on');
 
-document.getElementById('fbody').style.display='none';
+  document.getElementById('bkCard').innerHTML =
+    '<div class="bkrow">👤 <strong>'+data.name+'</strong></div>'+
+    '<div class="bkrow">📱 <strong>'+data.phone+'</strong></div>'+
+    '<div class="bkrow">⏰ <strong>'+data.meetingTime+'</strong></div>'+
+    (data.city?'<div class="bkrow">🌆 <strong>'+data.city+'</strong></div>':'')+
+    '<div class="bkrow">👨‍👩‍ <strong>'+data.family+'</strong></div>'+
+    '<div class="bkrow">📍 <strong>324, Cloud 9, Vaishali – 201010</strong></div>';
 
-var ss=document.getElementById('succScreen');
-
-ss.classList.add('on');
-
-document.getElementById('bkCard').innerHTML=
-
-'<div class="bkrow">👤 <strong>'+data.name+'</strong></div>'+
-'<div class="bkrow">📱 <strong>'+data.phone+'</strong></div>'+
-'<div class="bkrow">⏰ <strong>'+data.meetingTime+'</strong></div>';
-
-var waURL=buildWhatsAppURL(data);
-
-/* BACKUP BUTTON */
-
-var btn=document.getElementById("waBtn");
-
-btn.onclick=function(){
-
-window.open(waURL,"_blank");
-
-};
-
-
-/* AUTO OPEN WHATSAPP */
-
-setTimeout(function(){
-
-window.open(waURL,"_blank");
-
-},1200);
-
-
-/* REDIRECT */
-
-var secs=5;
-
-setInterval(function(){
-
-secs--;
-
-document.getElementById('cdN').textContent=secs;
-
-if(secs<=0){
-
-goSite();
-
+  // 5-second countdown then redirect
+  var secs = 5;
+  setTimeout(function(){ document.getElementById('rdBar').style.width='100%'; }, 60);
+  var t = setInterval(function(){
+    secs--;
+    var el = document.getElementById('cdN');
+    if(el) el.textContent = secs;
+    if(secs <= 0){ clearInterval(t); goSite(); }
+  }, 1000);
 }
-
-},1000);
-
-}
-
-
-/* REDIRECT FUNCTION */
 
 function goSite(){
-
-window.location.href=SITE;
-
+  try{ window.top.location.href = SITE; }catch(e){ window.location.href = SITE; }
 }
 
+// ── Wire up all events on DOM ready ──────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function(){
 
-/* EVENTS */
+  // Step navigation
+  document.getElementById('btn1').addEventListener('click', function(){ if(v1()) showStep(2); });
+  document.getElementById('back2').addEventListener('click', function(){ showStep(1); });
+  document.getElementById('btn2').addEventListener('click', function(){ if(v2()) showStep(3); });
+  document.getElementById('back3').addEventListener('click', function(){ showStep(2); });
+  document.getElementById('subBtn').addEventListener('click', doSubmit);
 
-document.getElementById('btn1').onclick=function(){
+  // Family cards — tap to toggle, supports multiple selection
+  document.querySelectorAll('.fc').forEach(function(card){
+    card.addEventListener('click', function(e){
+      e.preventDefault();
+      var cb   = card.querySelector('input[type="checkbox"]');
+      var chk  = card.querySelector('.fc-chk');
+      cb.checked = !cb.checked;
+      card.classList.toggle('sel', cb.checked);
+      chk.style.color = cb.checked ? '#fff' : 'transparent';
+      if(cb.checked){
+        document.querySelectorAll('.fc').forEach(function(c){ c.classList.remove('ferr'); });
+        document.getElementById('e-fam').classList.remove('on');
+      }
+    });
+  });
 
-showStep(2);
+  // Time slot tiles
+  document.querySelectorAll('.stile').forEach(function(tile){
+    tile.addEventListener('click', function(){
+      document.querySelectorAll('.stile').forEach(function(t){
+        t.classList.remove('sel','serr');
+        t.querySelector('.s-chk').style.color = 'transparent';
+      });
+      tile.classList.add('sel');
+      tile.querySelector('.s-chk').style.color = '#fff';
+      selSlot = tile.getAttribute('data-slot');
+      document.getElementById('e-slot').classList.remove('on');
+    });
+  });
 
-};
-
-document.getElementById('btn2').onclick=function(){
-
-showStep(3);
-
-};
-
-document.getElementById('back2').onclick=function(){
-
-showStep(1);
-
-};
-
-document.getElementById('back3').onclick=function(){
-
-showStep(2);
-
-};
-
-document.getElementById('subBtn').onclick=doSubmit;
-
-
-/* SLOT SELECT */
-
-document.querySelectorAll('.stile').forEach(function(tile){
-
-tile.onclick=function(){
-
-selSlot=this.getAttribute('data-slot');
-
-};
-
+  // Phone: digits only
+  document.getElementById('phone').addEventListener('input', function(){
+    this.value = this.value.replace(/\D/g,'').slice(0,10);
+  });
 });
-
-
 </script>
-
 </body>
-</html>
+</html>  
