@@ -20,7 +20,7 @@ body{font-family:'Nunito',sans-serif;background:#F2F5F3;min-height:100vh;display
 
 /* Logo row — full-width wide logo image */
 .logo-row{display:flex;flex-direction:column;align-items:flex-start;gap:10px;margin-bottom:16px;position:relative;z-index:1;}
-.logo-box{width:100%;max-width:150px;height:60px;border-radius:13px;background:#fff;padding:5px 14px;box-shadow:0 5px 20px rgba(0,0,0,.22),0 0 0 3px rgba(245,166,35,.5);display:flex;align-items:center;justify-content:flex-start;overflow:hidden;}
+.logo-box{width:90px;height:50px;border-radius:11px;background:#fff;padding:4px 10px;box-shadow:0 5px 20px rgba(0,0,0,.22),0 0 0 3px rgba(245,166,35,.5);display:flex;align-items:center;justify-content:flex-start;overflow:hidden;}
 .logo-box img{width:auto;max-width:100%;height:100%;object-fit:contain;object-position:left center;display:block;}
 .logo-fb{font-size:34px;line-height:1;display:none;}
 .brand{display:flex;flex-direction:column;gap:1px;}
@@ -127,6 +127,12 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
 .bsite{width:100%;height:50px;border:2.5px solid #1C6E42;border-radius:13px;background:transparent;color:#1C6E42;font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:7px;}
 .bsite:hover{background:#EAF5F0;}
 
+/* ── WhatsApp notice banner (success screen only) ─────── */
+.wa-notice{width:100%;background:#E7F9EE;border:1.5px solid #25D366;border-radius:13px;padding:11px 14px;display:flex;align-items:center;gap:10px;margin-bottom:14px;text-align:left;}
+.wa-notice-ico{font-size:22px;flex-shrink:0;}
+.wa-notice-txt{font-size:12px;font-weight:600;color:#1A7A40;line-height:1.5;}
+.wa-notice-txt strong{font-weight:900;}
+
 /* Footer */
 .ftr{padding:13px 20px 18px;border-top:1.5px solid #E2ECE7;flex-shrink:0;}
 .ftr-off{display:flex;align-items:flex-start;gap:9px;margin-bottom:11px;}
@@ -154,7 +160,7 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
       <div class="logo-box">
         <img src="https://image2url.com/r2/default/images/1772695630502-388ce269-d3e8-4880-9fd3-802b5f8e808c.jfif"
              alt="MangoTree Insurance"
-             onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+             onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
         <span class="logo-fb">🥭</span>
       </div>
       <div class="brand">
@@ -330,6 +336,13 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
     <div class="s-ttl">Consultation Booked!</div>
     <div class="s-msg">You're all set! A confirmation email is on its way.<br>Please carry your existing policy documents if you have them.</div>
     <div class="bkcard" id="bkCard"></div>
+
+    <!-- ── WhatsApp notice (shown after WA opens) ── -->
+    <div class="wa-notice" id="waBanner" style="display:none;">
+      <span class="wa-notice-ico">💬</span>
+      <div class="wa-notice-txt"><strong>WhatsApp opened!</strong> Your booking details have been sent to the MangoTree team for instant confirmation.</div>
+    </div>
+
     <div class="rd-lbl">Taking you to our website in <strong id="cdN">5</strong>s…</div>
     <div class="rd-wrap"><div class="rd-bar" id="rdBar"></div></div>
     <button class="bsite" onclick="goSite()">🌐 Visit MangoTree Website</button>
@@ -355,9 +368,10 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
 </div><!-- /shell -->
 
 <script>
-// ── Your Apps Script Web App URL ─────────────────────────────────────────────
-var GAS_URL = "https://script.google.com/macros/s/AKfycbzEWQJcg4bffzaOmdIFSiKa2AxLU5RjvwjpDKLLAPMdmfv4OsKX7c44MsLGJAUwOkqMyA/exec";
-var SITE    = "https://mangotreeinsurance.com/";
+// ── Config ────────────────────────────────────────────────────────────────────
+var GAS_URL          = "https://script.google.com/macros/s/AKfycbzEWQJcg4bffzaOmdIFSiKa2AxLU5RjvwjpDKLLAPMdmfv4OsKX7c44MsLGJAUwOkqMyA/exec";
+var SITE             = "https://mangotreeinsurance.com/";
+var WHATSAPP_NUMBER  = "919911502502"; // ← Change 1: India country code (91) + your 10-digit number
 // ─────────────────────────────────────────────────────────────────────────────
 
 var curStep = 1, selSlot = "";
@@ -396,7 +410,7 @@ function v1(){
   var n=document.getElementById('name').value.trim(),
       p=document.getElementById('phone').value.trim(),
       em=document.getElementById('email').value.trim(),ok=true;
-  setF('ir-name','e-name',!n);       if(!n)       ok=false;
+  setF('ir-name','e-name',!n);        if(!n)        ok=false;
   setF('ir-phone','e-phone',!isPhone(p)); if(!isPhone(p)) ok=false;
   setF('ir-email','e-email',!isEmail(em)); if(!isEmail(em)) ok=false;
   return ok;
@@ -425,27 +439,56 @@ function v3(){
 function getData(){
   var fam=Array.from(document.querySelectorAll('input[name="fam"]:checked')).map(function(c){return c.value;});
   return{
-    name:    document.getElementById('name').value.trim(),
-    phone:   document.getElementById('phone').value.trim(),
-    email:   document.getElementById('email').value.trim(),
-    city:    document.getElementById('city').value.trim(),
-    coverage:document.getElementById('cov').value,
-    family:  fam.join(', '),
+    name:        document.getElementById('name').value.trim(),
+    phone:       document.getElementById('phone').value.trim(),
+    email:       document.getElementById('email').value.trim(),
+    city:        document.getElementById('city').value.trim(),
+    coverage:    document.getElementById('cov').value,
+    family:      fam.join(', '),
     meetingTime: selSlot,
-    questions: document.getElementById('qs').value.trim()
+    questions:   document.getElementById('qs').value.trim()
   };
 }
 
+// ── Change 2: WhatsApp instant lead notification ──────────────────────────────
+// Opens wa.me so the lead details land in your WhatsApp inbox the moment
+// the user submits — no need to check email or Sheets.
+function openWhatsApp(data) {
+  var lines = [
+    "🥭 *New MangoTree Consultation Booking*",
+    "",
+    "👤 *Name:* "         + data.name,
+    "📱 *Phone:* "        + data.phone,
+    "⏰ *Meeting Time:* " + data.meetingTime,
+    "👨‍👩‍👧 *Family Members:* " + data.family,
+    "💰 *Coverage:* "     + data.coverage,
+    data.city ? "🌆 *City:* " + data.city : null,
+    data.questions ? "💬 *Questions:* " + data.questions : null,
+    "",
+    "📍 *Office:* 324, Cloud 9, Vaishali – 201010",
+    "https://maps.app.goo.gl/g95Y4mkAmH3YFw348",
+    "",
+    "Please confirm my appointment. Thank you! 🙏"
+  ].filter(function(l){ return l !== null; }); // removes optional fields if empty
+
+  var msg    = lines.join("\n");
+  var waUrl  = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg);
+
+  // Open WhatsApp in a new tab/window
+  window.open(waUrl, "_blank");
+
+  // Show the green WA banner on the success screen
+  var banner = document.getElementById('waBanner');
+  if(banner) banner.style.display = 'flex';
+}
+
 // ── Submit — GET request with URL params (works cross-origin, no CORS issues) ─
-// POST+no-cors doesn't actually send data to Apps Script from external domains.
-// GET requests with URL params work perfectly and bypass all CORS restrictions.
 function doSubmit(){
   if(!v1()||!v2()||!v3()) return;
   var data = getData();
   var btn  = document.getElementById('subBtn');
   btn.classList.add('ld'); btn.disabled = true;
 
-  // Build URL with all form data as query parameters
   var params = new URLSearchParams({
     name:        data.name,
     phone:       data.phone,
@@ -457,13 +500,10 @@ function doSubmit(){
     questions:   data.questions
   });
 
-  // Use an image tag trick — fires a GET to Apps Script with zero CORS issues
-  // Apps Script doGet() receives the params, saves to Sheet, sends emails
   var img = new Image();
   img.onload = img.onerror = function(){ showSucc(data); };
   img.src = GAS_URL + '?action=submit&' + params.toString();
 
-  // Fallback: show success after 4 seconds even if image never loads
   setTimeout(function(){
     if(btn.classList.contains('ld')){ showSucc(data); }
   }, 4000);
@@ -478,12 +518,15 @@ function showSucc(data){
   ss.classList.add('on');
 
   document.getElementById('bkCard').innerHTML =
-    '<div class="bkrow">👤 <strong>'+data.name+'</strong></div>'+
-    '<div class="bkrow">📱 <strong>'+data.phone+'</strong></div>'+
+    '<div class="bkrow">🧑 <strong>'+data.name+'</strong></div>'+
+    '<div class="bkrow">📞 <strong>'+data.phone+'</strong></div>'+
     '<div class="bkrow">⏰ <strong>'+data.meetingTime+'</strong></div>'+
-    (data.city?'<div class="bkrow">🌆 <strong>'+data.city+'</strong></div>':'')+
-    '<div class="bkrow">👨‍👩‍ <strong>'+data.family+'</strong></div>'+
+    (data.city?'<div class="bkrow">🏙️ <strong>'+data.city+'</strong></div>':'')+
+    '<div class="bkrow">👨‍👩‍👦‍👦 <strong>'+data.family+'</strong></div>'+
     '<div class="bkrow">📍 <strong>324, Cloud 9, Vaishali – 201010</strong></div>';
+
+  // ── Change 3: Open WhatsApp immediately on success ──────────────────────────
+  openWhatsApp(data);
 
   // 5-second countdown then redirect
   var secs = 5;
@@ -503,19 +546,18 @@ function goSite(){
 // ── Wire up all events on DOM ready ──────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', function(){
 
-  // Step navigation
   document.getElementById('btn1').addEventListener('click', function(){ if(v1()) showStep(2); });
   document.getElementById('back2').addEventListener('click', function(){ showStep(1); });
   document.getElementById('btn2').addEventListener('click', function(){ if(v2()) showStep(3); });
   document.getElementById('back3').addEventListener('click', function(){ showStep(2); });
   document.getElementById('subBtn').addEventListener('click', doSubmit);
 
-  // Family cards — tap to toggle, supports multiple selection
+  // Family cards
   document.querySelectorAll('.fc').forEach(function(card){
     card.addEventListener('click', function(e){
       e.preventDefault();
-      var cb   = card.querySelector('input[type="checkbox"]');
-      var chk  = card.querySelector('.fc-chk');
+      var cb  = card.querySelector('input[type="checkbox"]');
+      var chk = card.querySelector('.fc-chk');
       cb.checked = !cb.checked;
       card.classList.toggle('sel', cb.checked);
       chk.style.color = cb.checked ? '#fff' : 'transparent';
@@ -547,4 +589,4 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 </script>
 </body>
-</html>  
+</html>
