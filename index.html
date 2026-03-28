@@ -3,22 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>MangoTree Insurance — Free Consultation</title>
+<title>MangoTree Insurance — Book Consultation</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-/* ── Reset & base ─────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html{-webkit-text-size-adjust:100%;}
 body{font-family:'Nunito',sans-serif;background:#F2F5F3;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:0;}
 
-/* ── Card shell ───────────────────────────────────────── */
 .shell{width:100%;max-width:520px;background:#fff;display:flex;flex-direction:column;min-height:100vh;box-shadow:0 0 40px rgba(0,0,0,.06);}
 
-/* ── Header ───────────────────────────────────────────── */
+/* Header */
 .hdr{background:linear-gradient(150deg,#0C4726 0%,#1C6E42 55%,#239152 100%);padding:22px 20px 24px;position:relative;overflow:hidden;flex-shrink:0;}
 .hdr::after{content:'🥭';position:absolute;right:-16px;top:-20px;font-size:130px;opacity:.07;pointer-events:none;transform:rotate(-12deg);}
-
-/* Logo row — full-width wide logo image */
 .logo-row{display:flex;flex-direction:column;align-items:flex-start;gap:10px;margin-bottom:16px;position:relative;z-index:1;}
 .logo-box{width:90px;height:50px;border-radius:11px;background:#fff;padding:4px 10px;box-shadow:0 5px 20px rgba(0,0,0,.22),0 0 0 3px rgba(245,166,35,.5);display:flex;align-items:center;justify-content:flex-start;overflow:hidden;}
 .logo-box img{width:auto;max-width:100%;height:100%;object-fit:contain;object-position:left center;display:block;}
@@ -27,14 +23,12 @@ body{font-family:'Nunito',sans-serif;background:#F2F5F3;min-height:100vh;display
 .brand-n{font-size:16px;font-weight:900;color:#fff;line-height:1.25;letter-spacing:-.2px;}
 .brand-n span{color:#F5A623;}
 .brand-s{font-size:9px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:1.4px;text-transform:uppercase;}
-
-/* Header text */
 .hdr-body{position:relative;z-index:1;}
 .badge{display:inline-flex;align-items:center;gap:4px;background:#F5A623;color:#111;font-size:10px;font-weight:800;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;}
 .hdr-t{font-size:18px;font-weight:800;color:#fff;line-height:1.3;margin-bottom:3px;}
 .hdr-s{font-size:12px;font-weight:600;color:rgba(255,255,255,.6);}
 
-/* ── Progress ─────────────────────────────────────────── */
+/* Progress */
 .prog{padding:14px 20px 0;background:#fff;flex-shrink:0;}
 .prog-row{display:flex;align-items:center;margin-bottom:14px;}
 .pd{display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;}
@@ -47,7 +41,7 @@ body{font-family:'Nunito',sans-serif;background:#F2F5F3;min-height:100vh;display
 .pline{flex:1;height:3px;background:#E2ECE7;border-radius:4px;margin-bottom:12px;transition:background .4s;}
 .pline.on{background:#F5A623;}
 
-/* ── Form scroll ──────────────────────────────────────── */
+/* Form body */
 .fbody{flex:1;padding:18px 20px 24px;overflow-y:auto;-webkit-overflow-scrolling:touch;}
 .step{display:none;}
 .step.on{display:block;animation:sIn .3s ease both;}
@@ -65,12 +59,23 @@ body{font-family:'Nunito',sans-serif;background:#F2F5F3;min-height:100vh;display
 .irow.err{border-color:#D93025;box-shadow:0 0 0 4px rgba(217,48,37,.09);}
 .iico{padding:0 10px 0 13px;font-size:18px;flex-shrink:0;}
 input,select,textarea{flex:1;height:52px;padding:0 13px 0 2px;border:none;outline:none;background:transparent;font-family:'Nunito',sans-serif;font-size:16px;font-weight:700;color:#111;-webkit-appearance:none;appearance:none;}
+input[type="date"]{padding:0 13px 0 2px;cursor:pointer;}
 input::placeholder,textarea::placeholder{color:#C5CEC9;font-weight:500;}
 textarea{height:auto;min-height:80px;padding:12px 13px 12px 2px;resize:none;line-height:1.5;}
 select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.7' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:38px;}
 .etxt{display:none;font-size:11px;font-weight:700;color:#D93025;margin-top:4px;padding-left:2px;}
 .etxt.on{display:block;animation:shk .3s ease;}
 @keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+
+/* ── INTENT CHOICE (Step 0) ── */
+.intent-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px;}
+.intent-card{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px 16px;border:2.5px solid #E2ECE7;border-radius:16px;background:#fff;cursor:pointer;transition:all .2s;text-align:center;}
+.intent-card:active{transform:scale(.97);}
+.intent-card.sel{border-color:#1C6E42;background:#EAF5F0;box-shadow:0 0 0 3px rgba(28,110,66,.12);}
+.intent-emo{font-size:36px;line-height:1;}
+.intent-title{font-size:15px;font-weight:800;color:#111;}
+.intent-desc{font-size:11px;font-weight:600;color:#888;line-height:1.4;}
+.intent-card.sel .intent-title{color:#1C6E42;}
 
 /* Family grid */
 .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
@@ -105,6 +110,7 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
 .bnx{flex:1;height:52px;border:none;border-radius:13px;background:linear-gradient(135deg,#1C6E42,#239152);color:#fff;font-family:'Nunito',sans-serif;font-size:15px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;box-shadow:0 5px 16px rgba(28,110,66,.28);transition:all .2s;letter-spacing:.1px;}
 .bnx:active{transform:scale(.98);}
 .bnx:disabled{opacity:.65;cursor:not-allowed;transform:none;}
+.bnx.wa{background:linear-gradient(135deg,#25D366,#1ebe57);box-shadow:0 5px 16px rgba(37,211,102,.3);}
 .spin{width:18px;height:18px;border:2.5px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;display:none;}
 .bnx.ld .spin{display:block;}
 .bnx.ld .bl{display:none;}
@@ -119,7 +125,8 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
 .s-ttl{font-size:22px;font-weight:900;color:#111;margin-bottom:6px;}
 .s-msg{font-size:13px;font-weight:500;color:#888;line-height:1.6;margin-bottom:18px;}
 .bkcard{width:100%;background:#FFF8EE;border:1.5px solid rgba(245,166,35,.3);border-radius:13px;padding:14px 16px;text-align:left;margin-bottom:16px;}
-.bkrow{display:flex;align-items:flex-start;gap:9px;font-size:13px;font-weight:600;color:#444;padding:3px 0;}
+.bkrow{display:flex;align-items:flex-start;gap:9px;font-size:13px;font-weight:600;color:#444;padding:4px 0;}
+.bkrow span{color:#888;min-width:90px;}
 .bkrow strong{color:#111;font-weight:800;}
 .rd-lbl{font-size:12px;font-weight:600;color:#888;margin-bottom:7px;}
 .rd-wrap{width:100%;height:4px;background:#E2ECE7;border-radius:4px;overflow:hidden;margin-bottom:16px;}
@@ -127,7 +134,6 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
 .bsite{width:100%;height:50px;border:2.5px solid #1C6E42;border-radius:13px;background:transparent;color:#1C6E42;font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:7px;}
 .bsite:hover{background:#EAF5F0;}
 
-/* ── WhatsApp notice banner (success screen only) ─────── */
 .wa-notice{width:100%;background:#E7F9EE;border:1.5px solid #25D366;border-radius:13px;padding:11px 14px;display:flex;align-items:center;gap:10px;margin-bottom:14px;text-align:left;}
 .wa-notice-ico{font-size:22px;flex-shrink:0;}
 .wa-notice-txt{font-size:12px;font-weight:600;color:#1A7A40;line-height:1.5;}
@@ -158,7 +164,7 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
   <div class="hdr">
     <div class="logo-row">
       <div class="logo-box">
-        <img src="https://image2url.com/r2/default/images/1772695630502-388ce269-d3e8-4880-9fd3-802b5f8e808c.jfif"
+        <img src="https://pub-1407f82391df4ab1951418d04be76914.r2.dev/uploads/e85a9a14-210f-4975-8aad-a34a0347f093.jfif"
              alt="MangoTree Insurance"
              onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
         <span class="logo-fb">🥭</span>
@@ -186,13 +192,13 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
     </div>
   </div>
 
-  <!-- FORM -->
+  <!-- FORM BODY -->
   <div class="fbody" id="fbody">
 
-    <!-- Step 1 -->
+    <!-- ── STEP 1: Your details ── -->
     <div class="step on" id="s1">
       <div class="stitle">Nice to meet you 👋</div>
-      <div class="ssub">We'll send your booking confirmation to your email.</div>
+      <div class="ssub">Tell us a little about yourself to get started.</div>
 
       <div class="fld">
         <div class="flbl">Full Name <span class="req">*</span></div>
@@ -225,12 +231,30 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
         </div>
       </div>
 
+      <!-- ── INTENT CHOICE ── -->
+      <div class="fld">
+        <div class="flbl">What would you prefer? <span class="req">*</span></div>
+        <div class="intent-grid">
+          <div class="intent-card" id="ic-meet" onclick="selectIntent('meet')">
+            <span class="intent-emo">🏢</span>
+            <span class="intent-title">Visit Office</span>
+            <span class="intent-desc">Meet our advisor at Vaishali, NCR</span>
+          </div>
+          <div class="intent-card" id="ic-callback" onclick="selectIntent('callback')">
+            <span class="intent-emo">📞</span>
+            <span class="intent-title">Request Callback</span>
+            <span class="intent-desc">We'll call you at your convenience</span>
+          </div>
+        </div>
+        <div class="etxt" id="e-intent">Please choose how you'd like to connect.</div>
+      </div>
+
       <div class="nav">
         <button class="bnx" id="btn1"><span class="bl">Continue →</span><div class="spin"></div></button>
       </div>
     </div>
 
-    <!-- Step 2 -->
+    <!-- ── STEP 2: Coverage ── -->
     <div class="step" id="s2">
       <div class="stitle">Coverage details 🛡️</div>
       <div class="ssub">Tap all family members who need coverage.</div>
@@ -253,32 +277,28 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
       <div class="fld">
         <div class="flbl">Who needs to be covered? <span class="req">*</span> <span style="color:#888;font-weight:600;text-transform:none;letter-spacing:0;">(Select all)</span></div>
         <div class="fgrid" id="famGrid">
-          <label class="fc" data-val="Self">
-            <input type="checkbox" name="fam" value="Self">
-            <span class="fc-emo">🧑</span><span class="fc-lbl">Self</span><span class="fc-chk">✓</span>
-          </label>
-          <label class="fc" data-val="Spouse">
-            <input type="checkbox" name="fam" value="Spouse">
-            <span class="fc-emo">💑</span><span class="fc-lbl">Spouse</span><span class="fc-chk">✓</span>
-          </label>
-          <label class="fc" data-val="Children">
-            <input type="checkbox" name="fam" value="Children">
-            <span class="fc-emo">👶</span><span class="fc-lbl">Children</span><span class="fc-chk">✓</span>
-          </label>
-          <label class="fc" data-val="Parents">
-            <input type="checkbox" name="fam" value="Parents">
-            <span class="fc-emo">👴👵</span><span class="fc-lbl">Parents</span><span class="fc-chk">✓</span>
-          </label>
-          <label class="fc" data-val="In-Laws">
-            <input type="checkbox" name="fam" value="In-Laws">
-            <span class="fc-emo">🏠</span><span class="fc-lbl">In-Laws</span><span class="fc-chk">✓</span>
-          </label>
-          <label class="fc" data-val="Siblings">
-            <input type="checkbox" name="fam" value="Siblings">
-            <span class="fc-emo">🧑‍🤝‍🧑</span><span class="fc-lbl">Siblings</span><span class="fc-chk">✓</span>
-          </label>
+          <label class="fc" data-val="Self"><input type="checkbox" name="fam" value="Self">
+            <span class="fc-emo">🧑</span><span class="fc-lbl">Self</span><span class="fc-chk">✓</span></label>
+          <label class="fc" data-val="Spouse"><input type="checkbox" name="fam" value="Spouse">
+            <span class="fc-emo">💑</span><span class="fc-lbl">Spouse</span><span class="fc-chk">✓</span></label>
+          <label class="fc" data-val="Children"><input type="checkbox" name="fam" value="Children">
+            <span class="fc-emo">👶</span><span class="fc-lbl">Children</span><span class="fc-chk">✓</span></label>
+          <label class="fc" data-val="Parents"><input type="checkbox" name="fam" value="Parents">
+            <span class="fc-emo">👴👵</span><span class="fc-lbl">Parents</span><span class="fc-chk">✓</span></label>
+          <label class="fc" data-val="In-Laws"><input type="checkbox" name="fam" value="In-Laws">
+            <span class="fc-emo">🏠</span><span class="fc-lbl">In-Laws</span><span class="fc-chk">✓</span></label>
+          <label class="fc" data-val="Siblings"><input type="checkbox" name="fam" value="Siblings">
+            <span class="fc-emo">🧑‍🤝‍🧑</span><span class="fc-lbl">Siblings</span><span class="fc-chk">✓</span></label>
         </div>
         <div class="etxt" id="e-fam">Please select at least one member.</div>
+      </div>
+
+      <div class="fld">
+        <div class="flbl">Any questions? <span style="color:#888;font-weight:600;text-transform:none;letter-spacing:0;">(Optional)</span></div>
+        <div class="irow" style="align-items:flex-start;">
+          <span class="iico" style="padding-top:14px;">💬</span>
+          <textarea id="qs" placeholder="E.g. I want to compare my current plan…"></textarea>
+        </div>
       </div>
 
       <div class="nav">
@@ -287,13 +307,21 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
       </div>
     </div>
 
-    <!-- Step 3 -->
-    <div class="step" id="s3">
-      <div class="stitle">Pick a time 📅</div>
-      <div class="ssub">Choose when to meet us at our Vaishali office.</div>
+    <!-- ── STEP 3A: Schedule meeting (date + time) ── -->
+    <div class="step" id="s3-meet">
+      <div class="stitle">Pick a date & time 📅</div>
+      <div class="ssub">Choose when to visit us at our Vaishali office.</div>
 
       <div class="fld">
-        <div class="flbl">Preferred Meeting Time <span class="req">*</span></div>
+        <div class="flbl">Preferred Date <span class="req">*</span></div>
+        <div class="irow" id="ir-date"><span class="iico">📆</span>
+          <input id="meetDate" type="date" min="" />
+        </div>
+        <div class="etxt" id="e-date">Please pick a date.</div>
+      </div>
+
+      <div class="fld">
+        <div class="flbl">Preferred Time Slot <span class="req">*</span></div>
         <div class="slots">
           <button type="button" class="stile" data-slot="11 AM – 1 PM">
             <span class="s-emo">🌤️</span>
@@ -314,36 +342,46 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
         <div class="etxt" id="e-slot">Please choose a time slot.</div>
       </div>
 
-      <div class="fld">
-        <div class="flbl">Any questions? <span style="color:#888;font-weight:600;text-transform:none;letter-spacing:0;">(Optional)</span></div>
-        <div class="irow" style="align-items:flex-start;">
-          <span class="iico" style="padding-top:14px;">💬</span>
-          <textarea id="qs" placeholder="E.g. I want to compare my current plan…"></textarea>
+      <div class="nav">
+        <button class="bbk" id="back3m">← Back</button>
+        <button class="bnx" id="subBtnMeet"><span class="bl">✅ Book Consultation</span><div class="spin"></div></button>
+      </div>
+    </div>
+
+    <!-- ── STEP 3B: Callback (just submit) ── -->
+    <div class="step" id="s3-callback">
+      <div class="stitle">Almost there! 🎉</div>
+      <div class="ssub">Hit the button and we'll reach out to you shortly on WhatsApp.</div>
+
+      <div style="background:#F0FBF5;border:1.5px solid #B5E4CA;border-radius:14px;padding:18px 16px;margin-bottom:20px;">
+        <div style="font-size:13px;font-weight:700;color:#1C6E42;margin-bottom:8px;">What happens next?</div>
+        <div style="font-size:12px;font-weight:600;color:#555;line-height:1.9;">
+          ✅ Your details go to our advisor<br>
+          📱 We WhatsApp you within minutes<br>
+          🕐 Call back at a time that suits you<br>
+          🆓 Completely free — zero pressure
         </div>
       </div>
 
-      <div class="nav">
-        <button class="bbk" id="back3">← Back</button>
-        <button class="bnx" id="subBtn"><span class="bl">✅ Book Now</span><div class="spin"></div></button>
+      <div class="nav" style="flex-direction:column;gap:10px;">
+        <button class="bnx wa" id="subBtnCallback"><span class="bl">💬 Send via WhatsApp</span><div class="spin"></div></button>
+        <button class="bbk" id="back3c" style="width:100%;justify-content:center;">← Back</button>
       </div>
     </div>
 
-  </div><!-- /fbody -->
+  </div>
 
   <!-- SUCCESS -->
   <div class="succ" id="succScreen">
-    <div class="s-ico">✅</div>
-    <div class="s-ttl">Consultation Booked!</div>
-    <div class="s-msg">You're all set! A confirmation email is on its way.<br>Please carry your existing policy documents if you have them.</div>
+    <div class="s-ico" id="succIco">✅</div>
+    <div class="s-ttl" id="succTtl">Consultation Booked!</div>
+    <div class="s-msg" id="succMsg">You're all set! A confirmation email is on its way.</div>
     <div class="bkcard" id="bkCard"></div>
-
-    <!-- ── WhatsApp notice (shown after WA opens) ── -->
     <div class="wa-notice" id="waBanner" style="display:none;">
       <span class="wa-notice-ico">💬</span>
-      <div class="wa-notice-txt"><strong>WhatsApp opened!</strong> Your booking details have been sent to the MangoTree team for instant confirmation.</div>
+      <div class="wa-notice-txt"><strong>WhatsApp opened!</strong> Your details have been sent to the MangoTree team.</div>
     </div>
-
-    <div class="rd-lbl">Taking you to our website in <strong id="cdN">5</strong>s…</div>
+    <div class="rd-lbl" id="rdLbl">Taking you to our website in <strong id="cdN">5</strong>s…</div>
     <div class="rd-wrap"><div class="rd-bar" id="rdBar"></div></div>
     <button class="bsite" onclick="goSite()">🌐 Visit MangoTree Website</button>
   </div>
@@ -365,130 +403,158 @@ select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='htt
     </div>
   </div>
 
-</div><!-- /shell -->
+</div>
 
 <script>
-// ── Config ────────────────────────────────────────────────────────────────────
-var GAS_URL = "https://script.google.com/macros/s/AKfycbwdcAfB5RlowbLpebe5wibKE6uHXUVuIUm5k-8zKdQ_wKE2foWRFkF9-Ua3D4jK7cXkZw/exec";
-var SITE             = "https://mangotreeinsurance.com/";
-var WHATSAPP_NUMBER  = "919911502502"; // ← Change 1: India country code (91) + your 10-digit number
-// ─────────────────────────────────────────────────────────────────────────────
+var GAS_URL         = "https://script.google.com/macros/s/AKfycbwdcAfB5RlowbLpebe5wibKE6uHXUVuIUm5k-8zKdQ_wKE2foWRFkF9-Ua3D4jK7cXkZw/exec";
+var SITE            = "https://mangotreeinsurance.com/";
+var WHATSAPP_NUMBER = "919911502502";
 
-var curStep = 1, selSlot = "";
+var curStep  = 1;
+var selSlot  = "";
+var selIntent= "";  // "meet" or "callback"
 
-// ── Step navigation ───────────────────────────────────────────────────────────
-function showStep(n) {
-  document.querySelectorAll('.step').forEach(function(s){s.classList.remove('on');});
-  document.getElementById('s'+n).classList.add('on');
-  curStep = n;
-  syncProg();
+/* ── Set min date to today ── */
+(function(){
+  var today = new Date();
+  var mm = String(today.getMonth()+1).padStart(2,'0');
+  var dd = String(today.getDate()).padStart(2,'0');
+  var d = document.getElementById('meetDate');
+  if(d) d.min = today.getFullYear()+'-'+mm+'-'+dd;
+})();
+
+/* ── Intent selection ── */
+function selectIntent(type) {
+  selIntent = type;
+  document.getElementById('ic-meet').classList.toggle('sel', type==='meet');
+  document.getElementById('ic-callback').classList.toggle('sel', type==='callback');
+  document.getElementById('e-intent').classList.remove('on');
+}
+
+/* ── Progress bar ── */
+function syncProg(step) {
+  [1,2,3].forEach(function(i){
+    var pd = document.getElementById('pd'+i);
+    if(!pd) return;
+    pd.classList.remove('act','dn');
+    pd.querySelector('.pd-d').textContent = i < step ? '✓' : i;
+    if(i < step)  pd.classList.add('dn');
+    if(i === step) pd.classList.add('act');
+  });
+  [1,2].forEach(function(i){
+    document.getElementById('pl'+i).classList.toggle('on', step > i);
+  });
+}
+
+function showStep(id, progN) {
+  document.querySelectorAll('.step').forEach(function(s){ s.classList.remove('on'); });
+  document.getElementById(id).classList.add('on');
+  syncProg(progN || 1);
   document.getElementById('fbody').scrollTop = 0;
   window.scrollTo(0,0);
 }
-function syncProg() {
-  [1,2,3].forEach(function(i){
-    var pd = document.getElementById('pd'+i);
-    pd.classList.remove('act','dn');
-    pd.querySelector('.pd-d').textContent = i < curStep ? '✓' : i;
-    if(i < curStep)  pd.classList.add('dn');
-    if(i === curStep) pd.classList.add('act');
-  });
-  [1,2].forEach(function(i){
-    document.getElementById('pl'+i).classList.toggle('on', curStep > i);
-  });
+
+/* ── Validation ── */
+function isEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+function isPhone(v){ return /^\d{10}$/.test(v.trim()); }
+
+function setF(rid, eid, bad) {
+  var r=document.getElementById(rid), e=document.getElementById(eid);
+  if(bad){ if(r)r.classList.add('err'); if(e)e.classList.add('on'); }
+  else   { if(r)r.classList.remove('err'); if(e)e.classList.remove('on'); }
 }
 
-// ── Validation ────────────────────────────────────────────────────────────────
-function isEmail(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);}
-function isPhone(v){return /^\d{10}$/.test(v.trim());}
-function setF(rid,eid,bad){
-  var r=document.getElementById(rid),e=document.getElementById(eid);
-  if(bad){if(r)r.classList.add('err');if(e)e.classList.add('on');}
-  else{if(r)r.classList.remove('err');if(e)e.classList.remove('on');}
-}
-function v1(){
+function v1() {
   var n=document.getElementById('name').value.trim(),
       p=document.getElementById('phone').value.trim(),
-      em=document.getElementById('email').value.trim(),ok=true;
-  setF('ir-name','e-name',!n);        if(!n)        ok=false;
-  setF('ir-phone','e-phone',!isPhone(p)); if(!isPhone(p)) ok=false;
+      em=document.getElementById('email').value.trim(), ok=true;
+  setF('ir-name','e-name',!n);           if(!n)           ok=false;
+  setF('ir-phone','e-phone',!isPhone(p)); if(!isPhone(p))  ok=false;
   setF('ir-email','e-email',!isEmail(em)); if(!isEmail(em)) ok=false;
+  if(!selIntent){ document.getElementById('e-intent').classList.add('on'); ok=false; }
   return ok;
-}
-function v2(){
-  var c=document.getElementById('cov').value,
-      f=document.querySelectorAll('input[name="fam"]:checked'),ok=true;
-  setF('ir-cov','e-cov',!c); if(!c) ok=false;
-  if(f.length===0){
-    document.querySelectorAll('.fc').forEach(function(fc){fc.classList.add('ferr');});
-    document.getElementById('e-fam').classList.add('on');
-    ok=false;
-  }
-  return ok;
-}
-function v3(){
-  if(!selSlot){
-    document.querySelectorAll('.stile').forEach(function(t){t.classList.add('serr');});
-    document.getElementById('e-slot').classList.add('on');
-    return false;
-  }
-  return true;
 }
 
-// ── Collect data ──────────────────────────────────────────────────────────────
-function getData(){
-  var fam=Array.from(document.querySelectorAll('input[name="fam"]:checked')).map(function(c){return c.value;});
-  return{
+function v2() {
+  var c=document.getElementById('cov').value,
+      f=document.querySelectorAll('input[name="fam"]:checked'), ok=true;
+  setF('ir-cov','e-cov',!c); if(!c) ok=false;
+  if(f.length===0){
+    document.querySelectorAll('.fc').forEach(function(fc){ fc.classList.add('ferr'); });
+    document.getElementById('e-fam').classList.add('on'); ok=false;
+  }
+  return ok;
+}
+
+function v3meet() {
+  var d=document.getElementById('meetDate').value, ok=true;
+  setF('ir-date','e-date',!d); if(!d) ok=false;
+  if(!selSlot){
+    document.querySelectorAll('.stile').forEach(function(t){ t.classList.add('serr'); });
+    document.getElementById('e-slot').classList.add('on'); ok=false;
+  }
+  return ok;
+}
+
+/* ── Collect data ── */
+function getData() {
+  var fam = Array.from(document.querySelectorAll('input[name="fam"]:checked')).map(function(c){ return c.value; });
+  return {
     name:        document.getElementById('name').value.trim(),
     phone:       document.getElementById('phone').value.trim(),
     email:       document.getElementById('email').value.trim(),
     city:        document.getElementById('city').value.trim(),
     coverage:    document.getElementById('cov').value,
     family:      fam.join(', '),
+    questions:   document.getElementById('qs').value.trim(),
+    meetingDate: document.getElementById('meetDate').value,
     meetingTime: selSlot,
-    questions:   document.getElementById('qs').value.trim()
+    intent:      selIntent
   };
 }
 
-// ── Change 2: WhatsApp instant lead notification ──────────────────────────────
-// Opens wa.me so the lead details land in your WhatsApp inbox the moment
-// the user submits — no need to check email or Sheets.
-function openWhatsApp(data) {
-  var lines = [
-    " *New MangoTree Consultation Booking*",
-    "",
-    " *Name:* "         + data.name,
-    " *Phone:* "        + data.phone,
-    " *Meeting Time:* " + data.meetingTime,
-    " *Family Members:* " + data.family,
-    " *Coverage:* "     + data.coverage,
-    data.city ? " *City:* " + data.city : null,
-    data.questions ? " *Questions:* " + data.questions : null,
-    "",
-    " *Office:* 324, Cloud 9, Vaishali – 201010",
-    "https://maps.app.goo.gl/g95Y4mkAmH3YFw348",
-    "",
-    "Please confirm my appointment. Thank you! 🙏"
-  ].filter(function(l){ return l !== null; }); // removes optional fields if empty
-
-  var msg    = lines.join("\n");
-  var waUrl  = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg);
-
-  // Open WhatsApp in a new tab/window
-  window.open(waUrl, "_blank");
-
-  // Show the green WA banner on the success screen
-  var banner = document.getElementById('waBanner');
-  if(banner) banner.style.display = 'flex';
+/* ── WhatsApp message ── */
+function buildWAMsg(data, isCallback) {
+  var lines;
+  if(isCallback) {
+    lines = [
+      "🌿 *New Callback Request — MangoTree*",
+      "",
+      "👤 *Name:* " + data.name,
+      "📱 *Phone:* " + data.phone,
+      "📧 *Email:* " + data.email,
+      data.city ? "🌆 *City:* " + data.city : null,
+      "💰 *Coverage:* " + (data.coverage || "—"),
+      "👨‍👩‍👧 *Family:* " + (data.family || "—"),
+      data.questions ? "💬 *Questions:* " + data.questions : null,
+      "",
+      "Please call me back at your earliest convenience. Thank you! 🙏"
+    ];
+  } else {
+    lines = [
+      "🌿 *New Consultation Booking — MangoTree*",
+      "",
+      "👤 *Name:* " + data.name,
+      "📱 *Phone:* " + data.phone,
+      "📧 *Email:* " + data.email,
+      data.city ? "🌆 *City:* " + data.city : null,
+      "📅 *Date:* " + data.meetingDate,
+      "🕐 *Time:* " + data.meetingTime,
+      "💰 *Coverage:* " + (data.coverage || "—"),
+      "👨‍👩‍👧 *Family:* " + (data.family || "—"),
+      data.questions ? "💬 *Questions:* " + data.questions : null,
+      "",
+      "📍 *Office:* 324, Cloud 9, Vaishali – 201010",
+      "https://maps.app.goo.gl/g95Y4mkAmH3YFw348",
+      "",
+      "Please confirm my appointment. Thank you! 🙏"
+    ];
+  }
+  return lines.filter(function(l){ return l !== null; }).join("\n");
 }
 
-// ── Submit — GET request with URL params (works cross-origin, no CORS issues) ─
-function doSubmit(){
-  if(!v1()||!v2()||!v3()) return;
-  var data = getData();
-  var btn  = document.getElementById('subBtn');
-  btn.classList.add('ld'); btn.disabled = true;
-
+/* ── Submit to GAS ── */
+function submitToGAS(data, callback) {
   var params = new URLSearchParams({
     name:        data.name,
     phone:       data.phone,
@@ -496,39 +562,56 @@ function doSubmit(){
     city:        data.city,
     coverage:    data.coverage,
     family:      data.family,
+    questions:   data.questions,
+    meetingDate: data.meetingDate,
     meetingTime: data.meetingTime,
-    questions:   data.questions
+    intent:      data.intent,
+    leadTag:     data.intent === 'meet' ? 'Consultation' : 'Callback Request'
   });
 
-  var img = new Image();
-  img.onload = img.onerror = function(){ showSucc(data); };
-  img.src = GAS_URL + '?action=submit&' + params.toString();
+  var url = GAS_URL + '?action=submit&' + params.toString();
+  console.log('[MangoTree] Submitting:', url);
 
-  setTimeout(function(){
-    if(btn.classList.contains('ld')){ showSucc(data); }
-  }, 4000);
+  var img = new Image();
+  img.onload = img.onerror = callback;
+  img.src = url;
+  setTimeout(callback, 4000);
 }
 
-// ── Success screen + countdown redirect ──────────────────────────────────────
-function showSucc(data){
+/* ── Show success ── */
+function showSuccess(data) {
   document.getElementById('progWrap').style.display = 'none';
   document.getElementById('fbody').style.display    = 'none';
   document.getElementById('ftr').style.display      = 'none';
-  var ss = document.getElementById('succScreen');
-  ss.classList.add('on');
+  document.getElementById('succScreen').classList.add('on');
 
-  document.getElementById('bkCard').innerHTML =
-    '<div class="bkrow"> <strong>'+data.name+'</strong></div>'+
-    '<div class="bkrow"> <strong>'+data.phone+'</strong></div>'+
-    '<div class="bkrow"> <strong>'+data.meetingTime+'</strong></div>'+
-    (data.city?'<div class="bkrow"> <strong>'+data.city+'</strong></div>':'')+
-    '<div class="bkrow"> <strong>'+data.family+'</strong></div>'+
-    '<div class="bkrow"> <strong>324, Cloud 9, Vaishali – 201010</strong></div>';
+  var isMeet = data.intent === 'meet';
 
-  // ── Change 3: Open WhatsApp immediately on success ──────────────────────────
-  openWhatsApp(data);
+  document.getElementById('succIco').textContent  = isMeet ? '✅' : '💬';
+  document.getElementById('succTtl').textContent  = isMeet ? 'Consultation Booked!' : 'Request Sent!';
+  document.getElementById('succMsg').textContent  = isMeet
+    ? 'Great! A confirmation email is on its way. Please carry your policy documents.'
+    : 'We\'ve got your request. Our advisor will reach out to you shortly on WhatsApp.';
 
-  // 5-second countdown then redirect
+  var card = '<div class="bkrow"><span>Name</span><strong>' + data.name + '</strong></div>'
+           + '<div class="bkrow"><span>Phone</span><strong>' + data.phone + '</strong></div>';
+  if(isMeet) {
+    card += '<div class="bkrow"><span>Date</span><strong>' + data.meetingDate + '</strong></div>'
+          + '<div class="bkrow"><span>Time</span><strong>' + data.meetingTime + '</strong></div>'
+          + '<div class="bkrow"><span>Office</span><strong>324, Cloud 9, Vaishali</strong></div>';
+  } else {
+    card += '<div class="bkrow"><span>Coverage</span><strong>' + (data.coverage||'—') + '</strong></div>'
+          + '<div class="bkrow"><span>Family</span><strong>' + (data.family||'—') + '</strong></div>';
+  }
+  document.getElementById('bkCard').innerHTML = card;
+
+  /* Open WhatsApp */
+  var msg    = buildWAMsg(data, !isMeet);
+  var waUrl  = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg);
+  window.open(waUrl, "_blank");
+  document.getElementById('waBanner').style.display = 'flex';
+
+  /* Countdown */
   var secs = 5;
   setTimeout(function(){ document.getElementById('rdBar').style.width='100%'; }, 60);
   var t = setInterval(function(){
@@ -543,16 +626,58 @@ function goSite(){
   try{ window.top.location.href = SITE; }catch(e){ window.location.href = SITE; }
 }
 
-// ── Wire up all events on DOM ready ──────────────────────────────────────────
+/* ── Wire up events ── */
 document.addEventListener('DOMContentLoaded', function(){
 
-  document.getElementById('btn1').addEventListener('click', function(){ if(v1()) showStep(2); });
-  document.getElementById('back2').addEventListener('click', function(){ showStep(1); });
-  document.getElementById('btn2').addEventListener('click', function(){ if(v2()) showStep(3); });
-  document.getElementById('back3').addEventListener('click', function(){ showStep(2); });
-  document.getElementById('subBtn').addEventListener('click', doSubmit);
+  /* Step 1 → 2 */
+  document.getElementById('btn1').addEventListener('click', function(){
+    if(!v1()) return;
+    if(selIntent === 'callback') {
+      showStep('s2', 2);
+    } else {
+      showStep('s2', 2);
+    }
+  });
 
-  // Family cards
+  /* Step 2 back */
+  document.getElementById('back2').addEventListener('click', function(){ showStep('s1',1); });
+
+  /* Step 2 → 3 (branches based on intent) */
+  document.getElementById('btn2').addEventListener('click', function(){
+    if(!v2()) return;
+    if(selIntent === 'meet') {
+      showStep('s3-meet', 3);
+    } else {
+      showStep('s3-callback', 3);
+    }
+  });
+
+  /* Back from schedule */
+  document.getElementById('back3m').addEventListener('click', function(){ showStep('s2',2); });
+  document.getElementById('back3c').addEventListener('click', function(){ showStep('s2',2); });
+
+  /* Submit — Consultation */
+  document.getElementById('subBtnMeet').addEventListener('click', function(){
+    if(!v3meet()) return;
+    var btn = document.getElementById('subBtnMeet');
+    btn.classList.add('ld'); btn.disabled = true;
+    var data = getData();
+    var done = false;
+    function onDone(){ if(done) return; done=true; showSuccess(data); }
+    submitToGAS(data, onDone);
+  });
+
+  /* Submit — Callback (immediate WA + GAS) */
+  document.getElementById('subBtnCallback').addEventListener('click', function(){
+    var btn = document.getElementById('subBtnCallback');
+    btn.classList.add('ld'); btn.disabled = true;
+    var data = getData();
+    var done = false;
+    function onDone(){ if(done) return; done=true; showSuccess(data); }
+    submitToGAS(data, onDone);
+  });
+
+  /* Family cards */
   document.querySelectorAll('.fc').forEach(function(card){
     card.addEventListener('click', function(e){
       e.preventDefault();
@@ -568,7 +693,7 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   });
 
-  // Time slot tiles
+  /* Time slots */
   document.querySelectorAll('.stile').forEach(function(tile){
     tile.addEventListener('click', function(){
       document.querySelectorAll('.stile').forEach(function(t){
@@ -582,10 +707,11 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   });
 
-  // Phone: digits only
+  /* Phone: digits only */
   document.getElementById('phone').addEventListener('input', function(){
     this.value = this.value.replace(/\D/g,'').slice(0,10);
   });
+
 });
 </script>
 </body>
